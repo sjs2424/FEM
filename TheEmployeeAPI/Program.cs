@@ -49,16 +49,39 @@ employeeRoute.MapGet("/{id}", (int id) =>
     {
         return Results.NotFound();
     }
-    return Results.Ok(employee);
+    return Results.Ok(new GetEmployeeResponse {
+        FirstName = employee.FirstName,
+        LastName = employee.LastName,
+        Address1 = employee.Address1,
+        Address2 = employee.Address2,
+        City = employee.City,
+        State = employee.State,
+        ZipCode = employee.ZipCode,
+        PhoneNumber = employee.PhoneNumber,
+        Email = employee.Email,
+
+    });
 });
 
-employeeRoute.MapPost(string.Empty,(Employee employee) =>{
-    employee.Id = employees.Max(e=>e.Id) + 1;
-    employees.Add(employee);
-    return Results.Created($"/employees/{employee.Id}", employee);
+employeeRoute.MapPost(string.Empty,(CreateEmployeeRequest employee) =>{
+    var newEmployee = new Employee {
+        Id = employees.Max(e=> e.Id) + 1,
+        FirstName = employee.FirstName,
+        LastName = employee.LastName,
+        SocialSecurityNumber = employee.SocialSecurityNumber,
+        Address1 = employee.Address1,
+        Address2 = employee.Address2,
+        City = employee.City,
+        State = employee.State,
+        ZipCode = employee.ZipCode,
+        PhoneNumber = employee.PhoneNumber,
+        Email = employee.Email
+    };
+    employees.Add(newEmployee);
+    return Results.Created($"/employees/{newEmployee.Id}", employee);
 });
 
-employeeRoute.MapPut("/{id}", ([FromBody] Employee updatedEmployee, int id) =>
+employeeRoute.MapPut("/{id}", ([FromBody] UpdateEmployeeRequest updatedEmployee, int id) =>
 {
     var existingEmployee = employees.SingleOrDefault(e => e.Id == id);
     if(existingEmployee == null)

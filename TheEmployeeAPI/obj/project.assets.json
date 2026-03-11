@@ -2383,19 +2383,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sqs54\\.nuget\\packages\\": {}
+    "C:\\Users\\S361B\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
+      "projectUniqueName": "C:\\Users\\S361B\\ErieMobileProjects\\FEM\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
       "projectName": "TheEmployeeAPI",
-      "projectPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
-      "packagesPath": "C:\\Users\\sqs54\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\obj\\",
+      "projectPath": "C:\\Users\\S361B\\ErieMobileProjects\\FEM\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
+      "packagesPath": "C:\\Users\\S361B\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\S361B\\ErieMobileProjects\\FEM\\TheEmployeeAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sqs54\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\S361B\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2457,7 +2457,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.419/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
