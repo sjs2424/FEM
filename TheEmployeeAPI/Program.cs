@@ -29,7 +29,18 @@ app.UseHttpsRedirection();
 
 employeeRoute.MapGet(string.Empty, () =>
 {
-    return Results.Ok(employees);
+    return Results.Ok(employees.Select(employee => new GetEmployeeResponse
+    {
+        FirstName = employee.FirstName,
+        LastName = employee.LastName,
+        Address1 = employee.Address1,
+        Address2 = employee.Address2,
+        City = employee.City,
+        State = employee.State,
+        ZipCode = employee.ZipCode,
+        PhoneNumber = employee.PhoneNumber,
+        Email = employee.Email
+    }));
 });
 employeeRoute.MapGet("/{id}", (int id) =>
 {
