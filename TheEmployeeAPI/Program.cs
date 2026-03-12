@@ -49,16 +49,40 @@ employeeRoute.MapGet("/{id}", (int id) =>
     {
         return Results.NotFound();
     }
-    return Results.Ok(employee);
+    return Results.Ok(new GetEmployeeResponse
+    {
+        FirstName = employee.FirstName,
+        LastName = employee.LastName,
+        Address1 = employee.Address1,
+        Address2 = employee.Address2,
+        City = employee.City,
+        State = employee.State,
+        ZipCode = employee.ZipCode,
+        PhoneNumber = employee.PhoneNumber,
+        Email = employee.Email
+    });
 });
 
-employeeRoute.MapPost(string.Empty,(Employee employee) =>{
-    employee.Id = employees.Max(e=>e.Id) + 1;
-    employees.Add(employee);
-    return Results.Created($"/employees/{employee.Id}", employee);
+employeeRoute.MapPost(string.Empty,(CreateEmployeeRequest employee) =>{
+    var newEmployee = new Employee
+    {
+        Id = employees.Max(e => e.Id) + 1,
+        FirstName = employee.FirstName,
+        LastName = employee.LastName,
+        SocialSecurityNumber = employee.SocialSecurityNumber,
+        Address1 = employee.Address1,
+        Address2 = employee.Address2,
+        City = employee.City,
+        State = employee.State,
+        ZipCode = employee.ZipCode,
+        PhoneNumber = employee.PhoneNumber,
+        Email = employee.Email
+    };
+    employees.Add(newEmployee);
+    return Results.Created($"/employees/{newEmployee.Id}", newEmployee);
 });
 
-employeeRoute.MapPut("/{id}", ([FromBody] Employee updatedEmployee, int id) =>
+employeeRoute.MapPut("/{id}", ([FromBody] UpdateEmployeeRequest employee, int id) =>
 {
     var existingEmployee = employees.SingleOrDefault(e => e.Id == id);
     if(existingEmployee == null)
@@ -66,16 +90,13 @@ employeeRoute.MapPut("/{id}", ([FromBody] Employee updatedEmployee, int id) =>
         return Results.NotFound();
     }
 
-    existingEmployee.FirstName = updatedEmployee.FirstName;
-    existingEmployee.LastName = updatedEmployee.LastName;
-    existingEmployee.Email = updatedEmployee.Email;
-    existingEmployee.PhoneNumber = updatedEmployee.PhoneNumber;
-    existingEmployee.Address1 = updatedEmployee.Address1;
-    existingEmployee.Address2 = updatedEmployee.Address2;
-    existingEmployee.City = updatedEmployee.City;
-    existingEmployee.State = updatedEmployee.State;
-    existingEmployee.ZipCode = updatedEmployee.ZipCode;
-    existingEmployee.SocialSecurityNumber = updatedEmployee.SocialSecurityNumber;
+    existingEmployee.Email = employee.Email;
+    existingEmployee.PhoneNumber = employee.PhoneNumber;
+    existingEmployee.Address1 = employee.Address1;
+    existingEmployee.Address2 = employee.Address2;
+    existingEmployee.City = employee.City;
+    existingEmployee.State = employee.State;
+    existingEmployee.ZipCode = employee.ZipCode;
 
     return Results.Ok(existingEmployee);
 });
