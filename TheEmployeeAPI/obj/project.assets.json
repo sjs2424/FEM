@@ -2383,19 +2383,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\S361B\\.nuget\\packages\\": {}
+    "C:\\Users\\sqs54\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\S361B\\ErieMobileProjects\\FEM\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
+      "projectUniqueName": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj",
       "projectName": "TheEmployeeAPI",
-      "projectPath": "C:\\Users\\S361B\\ErieMobileProjects\\FEM\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
-      "packagesPath": "C:\\Users\\S361B\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\S361B\\ErieMobileProjects\\FEM\\TheEmployeeAPI\\obj\\",
+      "projectPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj",
+      "packagesPath": "C:\\Users\\sqs54\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\S361B\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sqs54\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2457,8 +2457,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.419/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
