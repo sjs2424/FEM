@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QPTWmXJUJyA=",
+  "dgSpecHash": "oGtIQUH4skE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
+  "projectFilePath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sqs54\\.nuget\\packages\\microsoft.aspnetcore.mvc.testing\\8.0.6\\microsoft.aspnetcore.mvc.testing.8.0.6.nupkg.sha512",
     "C:\\Users\\sqs54\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.12\\microsoft.aspnetcore.openapi.8.0.12.nupkg.sha512",

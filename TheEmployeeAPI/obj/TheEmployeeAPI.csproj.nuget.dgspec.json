@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj": {}
+    "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj": {
+    "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
+        "projectUniqueName": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj",
         "projectName": "TheEmployeeAPI",
-        "projectPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\TheEmployeeAPI.csproj",
+        "projectPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\TheEmployeeAPI.csproj",
         "packagesPath": "C:\\Users\\sqs54\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\TheEmployeeAPI\\obj\\",
+        "outputPath": "C:\\Users\\sqs54\\CsharpProjects\\frontEndMastersCoreAPI\\theemployeeapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sqs54\\AppData\\Roaming\\NuGet\\NuGet.Config"
