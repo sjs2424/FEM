@@ -49,7 +49,9 @@ employeeRoute.MapGet("/{id}", (int id, EmployeeRepository) =>
     {
         return Results.NotFound();
     }
-    return Results.Ok(new GetEmployeeResponse {
+
+    return Results.Ok(new GetEmployeeResponse
+    {
         FirstName = employee.FirstName,
         LastName = employee.LastName,
         Address1 = employee.Address1,
@@ -58,8 +60,7 @@ employeeRoute.MapGet("/{id}", (int id, EmployeeRepository) =>
         State = employee.State,
         ZipCode = employee.ZipCode,
         PhoneNumber = employee.PhoneNumber,
-        Email = employee.Email,
-
+        Email = employee.Email
     });
 });
 
@@ -89,8 +90,6 @@ employeeRoute.MapPut("/{id}", ([FromBody] UpdateEmployeeRequest updatedEmployee,
         return Results.NotFound();
     }
 
-    existingEmployee.FirstName = updatedEmployee.FirstName;
-    existingEmployee.LastName = updatedEmployee.LastName;
     existingEmployee.Email = updatedEmployee.Email;
     existingEmployee.PhoneNumber = updatedEmployee.PhoneNumber;
     existingEmployee.Address1 = updatedEmployee.Address1;
