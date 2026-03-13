@@ -16,9 +16,10 @@ public class EmployeeRepository : IRepository<Employee>
         if (entity == null)
         {
             throw new ArgumentNullException(nameof(entity));
-            entity.Id = _employees.Select(e => e.Id).DefaultIfEmpty(0).Max() + 1;
-            _employees.Add(entity);
         }
+
+        entity.Id = _employees.Select(e => e.Id).DefaultIfEmpty(0).Max() + 1;
+        _employees.Add(entity);
     }
 
     public void Update(Employee entity)

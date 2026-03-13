@@ -42,7 +42,7 @@ employeeRoute.MapGet(string.Empty, (EmployeeRepository repository) =>
     }));
 
 });
-employeeRoute.MapGet("/{id}", (int id, EmployeeRepository) =>
+employeeRoute.MapGet("/{id}", (int id, EmployeeRepository repository) =>
 {
     var employee = repository.GetById(id);
     if (employee == null)
@@ -97,7 +97,6 @@ employeeRoute.MapPut("/{id}", ([FromBody] UpdateEmployeeRequest updatedEmployee,
     existingEmployee.City = updatedEmployee.City;
     existingEmployee.State = updatedEmployee.State;
     existingEmployee.ZipCode = updatedEmployee.ZipCode;
-    existingEmployee.SocialSecurityNumber = updatedEmployee.SocialSecurityNumber;
 
     repository.Update(existingEmployee);
 
