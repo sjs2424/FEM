@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,7 @@ employees.Add(new Employee { Id= 2, FirstName= "Jane", LastName= "Does", SocialS
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IRepository<Employee>, EmployeeRepository>();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 var app = builder.Build();
 
@@ -76,10 +79,16 @@ employeeRoute.MapGet("/{id}", (int id, [FromServices] IRepository<Employee> repo
     });
 });
 
-employeeRoute.MapPost(string.Empty,(CreateEmployeeRequest employeeRequest, [FromServices] IRepository<Employee> repository) =>{
+employeeRoute.MapPost(string.Empty, async (CreateEmployeeRequest employeeRequest, IRepository<Employee> repository, IValidator<CreateEmployeeRequest> validator) => {
+    var validationResults = await validator.ValidateAsync(employeeRequest);
+    if (!validationResults.IsValid)
+    {
+        return Results.BadRequest(validationResults.ToDictionary());
+    }
+
     var newEmployee = new Employee {
-        FirstName = employeeRequest.FirstName,
-        LastName = employeeRequest.LastName,
+        FirstName = employeeRequest.FirstName!,
+        LastName = employeeRequest.LastName!,
         SocialSecurityNumber = employeeRequest.SocialSecurityNumber,
         Address1 = employeeRequest.Address1,
         Address2 = employeeRequest.Address2,

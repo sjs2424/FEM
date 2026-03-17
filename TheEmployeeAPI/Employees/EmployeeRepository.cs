@@ -8,6 +8,7 @@ public class EmployeeRepository : IRepository<Employee>
 
     public IEnumerable<Employee> GetAll()
     {
+        
         return _employees;
     }
 
