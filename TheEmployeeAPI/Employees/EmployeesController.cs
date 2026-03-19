@@ -79,8 +79,24 @@ public class EmployeesController : BaseController
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, UpdateEmployeeRequest employeeRequest)
+    public IActionResult Update(int id, UpdateEmployeeRequest updatedEmployee)
     {
-        
+            var existingEmployee = _repository.GetById(id);
+            if(existingEmployee == null)
+            {
+                return NotFound();
+            }
+
+            existingEmployee.Email = updatedEmployee.Email;
+            existingEmployee.PhoneNumber = updatedEmployee.PhoneNumber;
+            existingEmployee.Address1 = updatedEmployee.Address1;
+            existingEmployee.Address2 = updatedEmployee.Address2;
+            existingEmployee.City = updatedEmployee.City;
+            existingEmployee.State = updatedEmployee.State;
+            existingEmployee.ZipCode = updatedEmployee.ZipCode;
+
+            _repository.Update(existingEmployee);
+
+            return Ok(existingEmployee);
     }
 }
