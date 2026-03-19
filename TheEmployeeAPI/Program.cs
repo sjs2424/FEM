@@ -17,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IRepository<Employee>, EmployeeRepository>();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -123,6 +124,7 @@ employeeRoute.MapPut("/{id}", (UpdateEmployeeRequest updatedEmployee, int id, [F
     return Results.Ok(existingEmployee);
 });
 
+app.MapControllers();
 app.Run();
 
 
