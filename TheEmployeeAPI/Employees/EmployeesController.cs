@@ -1,47 +1,21 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-
 public class EmployeesController : BaseController
 {
     private readonly IRepository<Employee> _repository;
-    private readonly IValidator<CreateEmployeeRequest> _createValidator;
     private readonly ILogger<EmployeesController> _logger;
 
-    public EmployeesController(IRepository<Employee> repository, IValidator<CreateEmployeeRequest> createValidator, ILogger<EmployeesController> logger)
+    public EmployeesController(IRepository<Employee> repository, ILogger<EmployeesController> logger)
     {
         _repository = repository;
-        _createValidator = createValidator;
         _logger = logger;
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public IActionResult GetAllEmployees()
     {
-        return Ok(_repository.GetAll().Select(employee => new GetEmployeeResponse{
-        FirstName = employee.FirstName,
-        LastName = employee.LastName,
-        Address1 = employee.Address1,
-        Address2 = employee.Address2,
-        City = employee.City,
-        State = employee.State,
-        ZipCode = employee.ZipCode,
-        PhoneNumber = employee.PhoneNumber,
-        Email = employee.Email
-    }));
-    }
-
-    [HttpGet("{id}")]
-
-    public IActionResult GetById(int id)
-    {
-        var employee = _repository.GetById(id);
-        if (employee == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(new GetEmployeeResponse
+        var employees = _repository.GetAll().Select(employee => new GetEmployeeResponse
         {
             FirstName = employee.FirstName,
             LastName = employee.LastName,
@@ -53,18 +27,41 @@ public class EmployeesController : BaseController
             PhoneNumber = employee.PhoneNumber,
             Email = employee.Email
         });
+
+        return Ok(employees);
+    }
+
+    [HttpGet("{id:int}")]
+    public IActionResult GetEmployeeById(int id)
+    {
+        var employee = _repository.GetById(id);
+        if (employee == null)
+        {
+            return NotFound();
+        }
+
+        var employeeResponse = new GetEmployeeResponse
+        {
+            FirstName = employee.FirstName,
+            LastName = employee.LastName,
+            Address1 = employee.Address1,
+            Address2 = employee.Address2,
+            City = employee.City,
+            State = employee.State,
+            ZipCode = employee.ZipCode,
+            PhoneNumber = employee.PhoneNumber,
+            Email = employee.Email
+        };
+
+        return Ok(employeeResponse);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateEmployeeRequest employeeRequest)
+    public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeRequest employeeRequest)
     {
-        var validationResults = await _createValidator.ValidateAsync(employeeRequest);
-        if (!validationResults.IsValid)
+        await Task.CompletedTask;   //just avoided a compiler error for now
+        var newEmployee = new Employee
         {
-            return BadRequest(validationResults.ToDictionary());
-        }
-
-        var newEmployee = new Employee {
             FirstName = employeeRequest.FirstName!,
             LastName = employeeRequest.LastName!,
             SocialSecurityNumber = employeeRequest.SocialSecurityNumber,
@@ -76,41 +73,42 @@ public class EmployeesController : BaseController
             PhoneNumber = employeeRequest.PhoneNumber,
             Email = employeeRequest.Email
         };
+
         _repository.Create(newEmployee);
-        return Created($"/employees/{newEmployee.Id}", employeeRequest);
+        return CreatedAtAction(nameof(GetEmployeeById), new { id = newEmployee.Id }, newEmployee);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, UpdateEmployeeRequest updatedEmployee)
+    public IActionResult UpdateEmployee(int id, [FromBody] UpdateEmployeeRequest employeeRequest)
     {
-            _logger.LogInformation("Updating employee with ID: {EmployeeId}", id);
+        _logger.LogInformation("Updating employee with ID: {EmployeeId}", id);
 
-            var existingEmployee = _repository.GetById(id);
-            if(existingEmployee == null)
-            {
-                _logger.LogWarning("Employee with ID: {EmployeeId} not found", id);
-                return NotFound();
-            }
+        var existingEmployee = _repository.GetById(id);
+        if (existingEmployee == null)
+        {
+            _logger.LogWarning("Employee with ID: {EmployeeId} not found", id);
+            return NotFound();
+        }
 
-            _logger.LogDebug("Updating employee details for ID: {EmployeeId}", id);
-            existingEmployee.Email = updatedEmployee.Email;
-            existingEmployee.PhoneNumber = updatedEmployee.PhoneNumber;
-            existingEmployee.Address1 = updatedEmployee.Address1;
-            existingEmployee.Address2 = updatedEmployee.Address2;
-            existingEmployee.City = updatedEmployee.City;
-            existingEmployee.State = updatedEmployee.State;
-            existingEmployee.ZipCode = updatedEmployee.ZipCode;
+        _logger.LogDebug("Updating employee details for ID: {EmployeeId}", id);
+        existingEmployee.Address1 = employeeRequest.Address1;
+        existingEmployee.Address2 = employeeRequest.Address2;
+        existingEmployee.City = employeeRequest.City;
+        existingEmployee.State = employeeRequest.State;
+        existingEmployee.ZipCode = employeeRequest.ZipCode;
+        existingEmployee.PhoneNumber = employeeRequest.PhoneNumber;
+        existingEmployee.Email = employeeRequest.Email;
 
-            try
-            {
-                _repository.Update(existingEmployee);
-                _logger.LogInformation("Employee with ID: {EmployeeId} successfully updated", id);
-                return Ok(existingEmployee);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while updating employee with ID: {EmployeeId}", id);
-                return StatusCode(500, "An error occurred while updating the employee");
-            }
+        try
+        {
+            _repository.Update(existingEmployee);
+            _logger.LogInformation("Employee with ID: {EmployeeId} successfully updated", id);
+            return Ok(existingEmployee);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while updating employee with ID: {EmployeeId}", id);
+            return StatusCode(500, "An error occurred while updating the employee");
+        }
     }
 }
